@@ -1,30 +1,40 @@
 package org.example.infrastructure.repository;
 
-import com.google.gson.GsonBuilder;
 import org.example.application.io.Reader;
+import org.example.application.io.Writer;
 import org.example.domain.model.Task;
 import org.example.domain.repository.TaskRepository;
 import org.example.infrastructure.io.JsonFileReader;
+import org.example.infrastructure.io.JsonFileWriter;
 
 import java.util.List;
 
 public class LocalTaskRepositoryImpl implements TaskRepository {
 
     Reader jsonFileReader = new JsonFileReader();
+    Writer jsonFileWriter = new JsonFileWriter();
 
     @Override
     public Task addTask(Task task) {
-        return null;
+        List<Task> tasks = this.getAllTasks();
+        tasks.add(task);
+        jsonFileWriter.save(tasks);
+        return task;
     }
 
     @Override
     public Task updateTask(Task task) {
-        return null;
+        this.removeTask(task);
+        this.addTask(task);
+        return task;
     }
 
     @Override
     public boolean removeTask(Task task) {
-        return false;
+        List<Task> tasks = this.getAllTasks();
+        tasks.remove(task);
+        jsonFileWriter.save(tasks);
+        return true;
     }
 
     @Override
