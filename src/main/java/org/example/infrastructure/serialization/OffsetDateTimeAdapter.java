@@ -6,14 +6,14 @@ import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
+public class OffsetDateTimeAdapter extends TypeAdapter<OffsetDateTime> {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxx");
 
     @Override
-    public void write(JsonWriter out, LocalDateTime value) throws IOException {
+    public void write(JsonWriter out, OffsetDateTime value) throws IOException {
         if (value != null) {
             out.value(formatter.format(value));
         } else {
@@ -22,13 +22,13 @@ public class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
     }
 
     @Override
-    public LocalDateTime read(JsonReader in) throws IOException {
+    public OffsetDateTime read(JsonReader in) throws IOException {
         if (in.peek() == JsonToken.NULL) {
             in.nextNull();
             return null;
         } else {
             String str = in.nextString();
-            return LocalDateTime.parse(str, formatter);
+            return OffsetDateTime.parse(str, formatter);
         }
     }
 }

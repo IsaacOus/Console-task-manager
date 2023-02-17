@@ -5,16 +5,16 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.example.application.io.Reader;
 import org.example.domain.model.Task;
-import org.example.infrastructure.serialization.LocalDateTimeAdapter;
+import org.example.infrastructure.serialization.OffsetDateTimeAdapter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class JsonFileReader implements Reader {
 
-    private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
+    private final Gson gson = new GsonBuilder().registerTypeAdapter(OffsetDateTime.class, new OffsetDateTimeAdapter()).create();
     private final JsonFile jsonFile;
     public JsonFileReader(JsonFile jsonFile) {
         this.jsonFile = jsonFile;

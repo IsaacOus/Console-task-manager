@@ -3,7 +3,7 @@ package org.example.domain.model;
 import com.google.gson.annotations.SerializedName;
 import org.example.domain.TaskState;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,11 +11,11 @@ public class Task {
     @SerializedName("Description")
     private final String description;
     @SerializedName("Created")
-    private final LocalDateTime creationDate;
+    private final OffsetDateTime creationDate;
     @SerializedName("DueDate")
-    private final LocalDateTime dueDate;
+    private final OffsetDateTime dueDate;
     @SerializedName("CloseDate")
-    private final LocalDateTime closeDate;
+    private final OffsetDateTime closeDate;
     @SerializedName("State")
     private TaskState state = TaskState.TODO;
     @SerializedName("Tag")
@@ -23,7 +23,7 @@ public class Task {
     @SerializedName("SubTasks")
     private final List<Task> subTasks;
 
-    public Task(String description, LocalDateTime creationDate, LocalDateTime dueDate, LocalDateTime closeDate, String tag, List<Task> subTasks) {
+    public Task(String description, OffsetDateTime creationDate, OffsetDateTime dueDate, OffsetDateTime closeDate, String tag, List<Task> subTasks) {
         this.description = description;
         this.creationDate = creationDate;
         this.dueDate = dueDate;
@@ -36,15 +36,15 @@ public class Task {
         return description;
     }
 
-    public LocalDateTime getCreationDate() {
+    public OffsetDateTime getCreationDate() {
         return creationDate;
     }
 
-    public LocalDateTime getDueDate() {
+    public OffsetDateTime getDueDate() {
         return dueDate;
     }
 
-    public LocalDateTime getCloseDate() {
+    public OffsetDateTime getCloseDate() {
         return closeDate;
     }
 

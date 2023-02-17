@@ -1,13 +1,13 @@
 package org.example.domain.model;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 public class TaskBuilder {
     private String description;
-    private LocalDateTime creationDate;
-    private LocalDateTime dueDate;
-    private LocalDateTime closeDate;
+    private OffsetDateTime creationDate;
+    private OffsetDateTime dueDate;
+    private OffsetDateTime closeDate;
     private String tag;
     private List<Task> subTasks;
 
@@ -16,17 +16,17 @@ public class TaskBuilder {
         return this;
     }
 
-    public TaskBuilder setCreationDate(LocalDateTime creationDate) {
+    public TaskBuilder setCreationDate(OffsetDateTime creationDate) {
         this.creationDate = creationDate;
         return this;
     }
 
-    public TaskBuilder dueDate(LocalDateTime dueDate) {
+    public TaskBuilder dueDate(OffsetDateTime dueDate) {
         this.dueDate = dueDate;
         return this;
     }
 
-    public TaskBuilder closeDate(LocalDateTime closeDate) {
+    public TaskBuilder closeDate(OffsetDateTime closeDate) {
         this.closeDate = closeDate;
         return this;
     }
