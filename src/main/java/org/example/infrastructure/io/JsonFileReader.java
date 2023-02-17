@@ -6,23 +6,20 @@ import org.example.application.io.Reader;
 import org.example.domain.model.Task;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
 public class JsonFileReader implements Reader {
 
     private final Gson gson = new Gson();
+    private final JsonFile jsonFile = new JsonFile();
 
     @Override
     public List<Task> read() {
         StringBuilder json = new StringBuilder();
-        String homeDirectory = System.getProperty("user.home");
-        String filePath = homeDirectory + File.separator + ".consoleagenda" + File.separator + "log.txt";
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            BufferedReader reader = jsonFile.openReader();
             String line;
             while ((line = reader.readLine()) != null) {
                 json.append(line);
