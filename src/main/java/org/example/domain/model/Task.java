@@ -32,6 +32,34 @@ public class Task {
         this.subTasks = subTasks;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public LocalDateTime getCloseDate() {
+        return closeDate;
+    }
+
+    public TaskState getState() {
+        return state;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public List<Task> getSubTasks() {
+        return subTasks;
+    }
+
     @Override
     public String toString() {
         return "Task{" +

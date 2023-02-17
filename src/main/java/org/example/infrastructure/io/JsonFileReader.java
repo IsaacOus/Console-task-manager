@@ -16,7 +16,6 @@ public class JsonFileReader implements Reader {
 
     private final Gson gson = new GsonBuilder().registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
     private final JsonFile jsonFile;
-
     public JsonFileReader(JsonFile jsonFile) {
         this.jsonFile = jsonFile;
     }
