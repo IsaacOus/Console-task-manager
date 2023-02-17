@@ -15,6 +15,9 @@ public class Task {
     private final Optional<LocalDateTime> closeDate;
     private TaskState state = TaskState.TODO;
     private final Optional<String> tag;
+
+
+
     private final List<Task> subTasks;
 
 
@@ -26,6 +29,38 @@ public class Task {
         this.closeDate = closeDate;
         this.tag = tag;
         this.subTasks = subTasks;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public Optional<LocalDateTime> getDueDate() {
+        return dueDate;
+    }
+
+    public Optional<LocalDateTime> getCloseDate() {
+        return closeDate;
+    }
+
+    public TaskState getState() {
+        return state;
+    }
+
+    public void setState(TaskState state) {
+        this.state = state;
+    }
+
+    public Optional<String> getTag() {
+        return tag;
+    }
+
+    public List<Task> getSubTasks() {
+        return subTasks;
     }
 
     @Override
