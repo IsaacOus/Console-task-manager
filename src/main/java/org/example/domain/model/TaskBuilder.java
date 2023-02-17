@@ -1,12 +1,11 @@
 package org.example.domain.model;
 
-import org.example.domain.TaskState;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class TaskBuilder implements Builder {
+public class TaskBuilder {
     private String description;
     private LocalDateTime creationDate;
     private Optional<LocalDateTime> dueDate;
@@ -14,42 +13,40 @@ public class TaskBuilder implements Builder {
     private Optional<String> tag;
     private List<Task> subTasks;
 
-    @Override
-    public void setDescription(String description) {
+
+    public TaskBuilder setDescription(String description) {
         this.description = description;
+        return this;
     }
 
-    @Override
-    public void setCreationDate(LocalDateTime creationDate) {
+
+    public TaskBuilder setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+        return this;
     }
 
-    @Override
-    public void creationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
 
-    @Override
-    public void dueDate(Optional<LocalDateTime> dueDate) {
+    public TaskBuilder dueDate(Optional<LocalDateTime> dueDate) {
         this.dueDate = dueDate;
-
+        return this;
     }
 
-    @Override
-    public void closeDate(Optional<LocalDateTime> closeDate) {
+
+    public TaskBuilder closeDate(Optional<LocalDateTime> closeDate) {
         this.closeDate = closeDate;
-
+        return this;
     }
 
-    @Override
-    public void tag(Optional<String> tag) {
+
+    public TaskBuilder tag(Optional<String> tag) {
         this.tag = tag;
+        return this;
     }
 
-    @Override
-    public void subTasks(List<Task> subTasks) {
-        this.subTasks = subTasks;
 
+    public TaskBuilder subTasks(List<Task> subTasks) {
+        this.subTasks = subTasks;
+        return this;
     }
 
     public Task getResult() {
