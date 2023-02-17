@@ -1,48 +1,40 @@
 package org.example.domain.model;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public class TaskBuilder {
     private String description;
     private LocalDateTime creationDate;
-    private Optional<LocalDateTime> dueDate;
-    private Optional<LocalDateTime> closeDate;
-    private Optional<String> tag;
+    private LocalDateTime dueDate;
+    private LocalDateTime closeDate;
+    private String tag;
     private List<Task> subTasks;
-
 
     public TaskBuilder setDescription(String description) {
         this.description = description;
         return this;
     }
 
-
     public TaskBuilder setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
         return this;
     }
 
-
-    public TaskBuilder dueDate(Optional<LocalDateTime> dueDate) {
+    public TaskBuilder dueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
         return this;
     }
 
-
-    public TaskBuilder closeDate(Optional<LocalDateTime> closeDate) {
+    public TaskBuilder closeDate(LocalDateTime closeDate) {
         this.closeDate = closeDate;
         return this;
     }
 
-
-    public TaskBuilder tag(Optional<String> tag) {
+    public TaskBuilder tag(String tag) {
         this.tag = tag;
         return this;
     }
-
 
     public TaskBuilder subTasks(List<Task> subTasks) {
         this.subTasks = subTasks;

@@ -1,28 +1,29 @@
 package org.example.domain.model;
 
+import com.google.gson.annotations.SerializedName;
 import org.example.domain.TaskState;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Task {
-
+    @SerializedName("Description")
     private final String description;
+    @SerializedName("Created")
     private final LocalDateTime creationDate;
-    private final Optional<LocalDateTime> dueDate;
-    private final Optional<LocalDateTime> closeDate;
+    @SerializedName("DueDate")
+    private final LocalDateTime dueDate;
+    @SerializedName("CloseDate")
+    private final LocalDateTime closeDate;
+    @SerializedName("State")
     private TaskState state = TaskState.TODO;
-    private final Optional<String> tag;
-
-
-
+    @SerializedName("Tag")
+    private final String tag;
+    @SerializedName("SubTasks")
     private final List<Task> subTasks;
 
-
-
-    public Task(String description, LocalDateTime creationDate, Optional<LocalDateTime> dueDate, Optional<LocalDateTime> closeDate, Optional<String> tag, List<Task> subTasks) {
+    public Task(String description, LocalDateTime creationDate, LocalDateTime dueDate, LocalDateTime closeDate, String tag, List<Task> subTasks) {
         this.description = description;
         this.creationDate = creationDate;
         this.dueDate = dueDate;
@@ -31,36 +32,17 @@ public class Task {
         this.subTasks = subTasks;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public Optional<LocalDateTime> getDueDate() {
-        return dueDate;
-    }
-
-    public Optional<LocalDateTime> getCloseDate() {
-        return closeDate;
-    }
-
-    public TaskState getState() {
-        return state;
-    }
-
-    public void setState(TaskState state) {
-        this.state = state;
-    }
-
-    public Optional<String> getTag() {
-        return tag;
-    }
-
-    public List<Task> getSubTasks() {
-        return subTasks;
+    @Override
+    public String toString() {
+        return "Task{" +
+                "description='" + description + '\'' +
+                ", creationDate=" + creationDate +
+                ", dueDate=" + dueDate +
+                ", closeDate=" + closeDate +
+                ", state=" + state +
+                ", tag='" + tag + '\'' +
+                ", subTasks=" + subTasks +
+                '}';
     }
 
     @Override

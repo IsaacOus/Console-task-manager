@@ -7,7 +7,6 @@ import org.example.domain.service.TaskService;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public class TaskServiceImpl implements TaskService {
 
@@ -18,7 +17,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task addTask(String description, LocalDateTime creationDate, Optional<LocalDateTime> dueDate, Optional<LocalDateTime> closeDate, Optional<String> tag, List<Task> subTasks) {
+    public Task addTask(String description, LocalDateTime creationDate, LocalDateTime dueDate, LocalDateTime closeDate, String tag, List<Task> subTasks) {
         Task task = new TaskBuilder()
                 .setDescription(description)
                 .setCreationDate(creationDate)
