@@ -17,7 +17,6 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
     }
 
-
     @Override
     public Task addTask(String description, LocalDateTime creationDate, Optional<LocalDateTime> dueDate, Optional<LocalDateTime> closeDate, Optional<String> tag, List<Task> subTasks) {
         Task task = new TaskBuilder()
@@ -33,22 +32,23 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTask() {
-        return null;
+    public Task updateTask(int index, Task task) {
+        return this.taskRepository.updateTask(index, task);
     }
 
     @Override
-    public boolean removeTask() {
-        return false;
+    public boolean removeTask(int index) {
+        final Task task = this.taskRepository.getTaskByIndex(index);
+        return this.taskRepository.removeTask(task);
     }
 
     @Override
-    public Task getTask() {
-        return null;
+    public Task getTask(Task task) {
+        return this.taskRepository.getTask(task);
     }
 
     @Override
     public List<Task> getAllTasks() {
-        return null;
+        return this.taskRepository.getAllTasks();
     }
 }

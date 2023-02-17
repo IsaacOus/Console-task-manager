@@ -10,8 +10,8 @@ import java.util.Optional;
 public interface TaskService {
 
         Task addTask(String description, LocalDateTime creationDate, Optional<LocalDateTime> dueDate, Optional<LocalDateTime> closeDate, Optional<String> tag, List<Task> subTasks);
-        Task updateTask();
-        boolean removeTask();
-        Task getTask();
+        Task updateTask(int index, Task task);
+        boolean removeTask(int index);
+        Task getTask(Task task);
         List<Task> getAllTasks();
 }

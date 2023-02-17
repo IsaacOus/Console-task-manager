@@ -12,7 +12,11 @@ import java.util.List;
 public class JsonFileReader implements Reader {
 
     private final Gson gson = new Gson();
-    private final JsonFile jsonFile = new JsonFile();
+    private final JsonFile jsonFile;
+
+    public JsonFileReader(JsonFile jsonFile) {
+        this.jsonFile = jsonFile;
+    }
 
     @Override
     public List<Task> read() {

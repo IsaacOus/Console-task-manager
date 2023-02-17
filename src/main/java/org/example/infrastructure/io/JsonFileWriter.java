@@ -11,7 +11,11 @@ import java.util.List;
 public class JsonFileWriter implements Writer {
 
     private final Gson gson = new Gson();
-    private final JsonFile jsonFile = new JsonFile();
+    private final JsonFile jsonFile;
+
+    public JsonFileWriter(JsonFile jsonFile) {
+        this.jsonFile = jsonFile;
+    }
 
     @Override
     public boolean save(List<Task> tasks) {
