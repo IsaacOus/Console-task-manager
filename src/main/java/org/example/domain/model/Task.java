@@ -13,20 +13,17 @@ public class Task {
     private final LocalDateTime creationDate;
     private final Optional<LocalDateTime> dueDate;
     private final Optional<LocalDateTime> closeDate;
-    private final TaskState state;
+    private TaskState state = TaskState.TODO;
     private final Optional<String> tag;
     private final List<Task> subTasks;
 
-    public static Task of(String description, LocalDateTime creationDate, Optional<LocalDateTime> dueDate, Optional<LocalDateTime> closeDate, TaskState state, Optional<String> tag, List<Task> subTasks) {
-        return new Task(description, creationDate, dueDate, closeDate, state, tag, subTasks);
-    }
 
-    private Task(String description, LocalDateTime creationDate, Optional<LocalDateTime> dueDate, Optional<LocalDateTime> closeDate, TaskState state, Optional<String> tag, List<Task> subTasks) {
+
+    public Task(String description, LocalDateTime creationDate, Optional<LocalDateTime> dueDate, Optional<LocalDateTime> closeDate, Optional<String> tag, List<Task> subTasks) {
         this.description = description;
         this.creationDate = creationDate;
         this.dueDate = dueDate;
         this.closeDate = closeDate;
-        this.state = state;
         this.tag = tag;
         this.subTasks = subTasks;
     }
