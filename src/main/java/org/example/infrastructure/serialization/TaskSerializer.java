@@ -1,12 +1,18 @@
 package org.example.infrastructure.serialization;
 
+import org.example.domain.model.Task;
 import org.example.domain.model.TaskWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TaskSerializer {
-    public static String serialize(TaskWrapper task) {
+    private static int indexCounter = 0;
+
+    public static String serializeToString(TaskWrapper task) {
         StringBuilder serializedTask = new StringBuilder();
         serializedTask.append(TaskSerializer.repeatChar("\t", task.getNumberOfParentTasks())).append("Task #").append(task.getIndex()).append("\n");
-        serializedTask.append(TaskSerializer.repeatChar("\t", task.getNumberOfParentTasks())).append("[").append(task.getTask().getState()).append("] - \"").append(task.getTask().getDescription()).append("\"\n");
+        serializedTask.append(TaskSerializer.repeatChar("\t", task.getNumberOfParentTasks())).append("[").append(task.getTask().getState().getName()).append("] - \"").append(task.getTask().getDescription()).append("\"\n");
         serializedTask.append(TaskSerializer.repeatChar("\t", task.getNumberOfParentTasks())).append("#").append(task.getTask().getTag()).append("\n");
         serializedTask.append(TaskSerializer.repeatChar("\t", task.getNumberOfParentTasks())).append("[Created: ").append(task.getTask().getCreationDate()).append("][Due: ").append(task.getTask().getDueDate()).append("][Closed: ").append(task.getTask().getCloseDate()).append("]\n");
         serializedTask.append(TaskSerializer.repeatChar("\t", task.getNumberOfParentTasks())).append("SubTasks:\n");
@@ -16,8 +22,24 @@ public class TaskSerializer {
         return serializedTask.toString();
     }
 
-    public static String repeatChar(String s, int n) {
+    private static String repeatChar(String s, int n) {
         return String.valueOf(s).repeat(n);
     }
 
+    public static List<TaskWrapper> serializeToTaskWrapperList(List<Task> taskList) {
+        indexCounter = 0;
+        return flattenTaskList(taskList, 0);
+    }
+
+    private static List<TaskWrapper> flattenTaskList(List<Task> taskList, int numberOfParentTasks) {
+        final List<TaskWrapper> taskWrapperList = new ArrayList<>();
+        for (final Task task : taskList) {
+            indexCounter++;
+            taskWrapperList.add(new TaskWrapper(indexCounter, task, numberOfParentTasks));
+            if (task.getSubTasks() != null && !task.getSubTasks().isEmpty()) {
+                taskWrapperList.addAll(flattenTaskList(task.getSubTasks(), numberOfParentTasks + 1));
+            }
+        }
+        return taskWrapperList;
+    }
 }
