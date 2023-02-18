@@ -10,7 +10,6 @@ public interface TaskRepository {
     Task updateTask(int index, Task task);
     boolean removeTask(Task task);
     Task getTask(Task task);
-    Task getTaskByIndex(int index);
+    Task getTaskByIndex(int index, List<Task> tasks);
     List<Task> getAllTasks();
-
 }

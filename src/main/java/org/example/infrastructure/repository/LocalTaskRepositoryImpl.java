@@ -16,6 +16,8 @@ public class LocalTaskRepositoryImpl implements TaskRepository {
     private final Reader jsonFileReader = new JsonFileReader(jsonFile);
     private final Writer jsonFileWriter = new JsonFileWriter(jsonFile);
 
+    private int index = 0;
+
     @Override
     public Task addTask(Task task) {
         List<Task> tasks = this.getAllTasks();
@@ -35,9 +37,9 @@ public class LocalTaskRepositoryImpl implements TaskRepository {
     @Override
     public boolean removeTask(Task task) {
         List<Task> tasks = this.getAllTasks();
-        tasks.remove(task);
+        boolean result = tasks.remove(task);
         jsonFileWriter.save(tasks);
-        return true;
+        return result;
     }
 
     @Override
@@ -49,8 +51,18 @@ public class LocalTaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Task getTaskByIndex(int index) {
-        return jsonFileReader.read().get(index);
+    public Task getTaskByIndex(int index, List<Task> tasks) {
+        Task matchingTask = null;
+        for (Task task : tasks) {
+            if (task.getSubTasks() != null && !task.getSubTasks().isEmpty()) {
+                matchingTask = getTaskByIndex(index, task.getSubTasks());
+            }
+            if (this.index == index) {
+                return task;
+            }
+            this.index++;
+        }
+        return matchingTask;
     }
 
     @Override

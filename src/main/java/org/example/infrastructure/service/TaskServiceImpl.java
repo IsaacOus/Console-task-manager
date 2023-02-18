@@ -37,7 +37,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public boolean removeTask(int index) {
-        final Task task = this.taskRepository.getTaskByIndex(index);
+        final Task task = this.taskRepository.getTaskByIndex(index, this.getAllTasks());
         return this.taskRepository.removeTask(task);
     }
 
