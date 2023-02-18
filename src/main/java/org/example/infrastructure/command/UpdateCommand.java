@@ -9,13 +9,15 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-public class AddCommand implements Command {
+public class UpdateCommand implements Command {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private final int index;
     private final String content;
     private final String dueDate;
     private final String status;
 
-    public AddCommand(String content, String dueDate, String status) {
+    public UpdateCommand(int index, String content, String dueDate, String status) {
+        this.index = index;
         this.content = content;
         this.dueDate = dueDate;
         this.status = status;
@@ -23,17 +25,15 @@ public class AddCommand implements Command {
 
     @Override
     public void execute(TaskService taskService, Printer printer) {
-        OffsetDateTime creationDate = OffsetDateTime.now();
         OffsetDateTime dueDate = null;
-        OffsetDateTime closeDate = null;
-        String tag = null;
         if (!this.dueDate.isBlank()) {
             dueDate = OffsetDateTime.of(LocalDate.parse(this.dueDate, this.formatter).atStartOfDay(), ZoneOffset.UTC);
         }
-        if (status.equals("closed")) {
-            closeDate = OffsetDateTime.now();
+        final boolean result = taskService.updateTask(index - 1, content, dueDate, status);
+        if (!result) {
+            printer.print("Failed to update task");
+        } else {
+            printer.print("Task updated");
         }
-        taskService.addTask(content, creationDate, dueDate, closeDate, tag, null);
-        printer.print("Task added");
     }
 }

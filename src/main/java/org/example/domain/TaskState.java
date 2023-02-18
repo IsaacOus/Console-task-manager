@@ -32,4 +32,13 @@ public enum TaskState {
         }
         throw new IllegalArgumentException("Integer value could not be mapped to an enum value" + value);
     }
+
+    public static TaskState fromString(String name) {
+        for (TaskState state : TaskState.values()) {
+            if (state.getName().equals(name)) {
+                return state;
+            }
+        }
+        throw new IllegalArgumentException("String value could not be mapped to an enum value" + name);
+    }
 }

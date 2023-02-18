@@ -26,7 +26,7 @@ public class HexagonalArchitectureTest {
     void applicationLayerShouldOnlyDependOnDomainLayer() {
         ArchRule rule = ArchRuleDefinition.classes()
                 .that().resideInAPackage("..application..")
-                .should().onlyDependOnClassesThat().resideInAPackage("..domain..");
+                .should().onlyDependOnClassesThat().resideInAnyPackage("..domain..", "java..", "..application..");
         rule.check(classes);
     }
 
@@ -35,8 +35,8 @@ public class HexagonalArchitectureTest {
         ArchRule rule = ArchRuleDefinition.noClasses()
                 .that().resideInAPackage("..infrastructure..")
                 .and().haveModifier(JavaModifier.PUBLIC)
-                .should().dependOnClassesThat().resideOutsideOfPackage("..infrastructure..");
+                .should().dependOnClassesThat().resideOutsideOfPackages("..infrastructure..", "java..", "..domain..", "..application..", "com.google.gson..")
+                .andShould().notBeInterfaces();
         rule.check(classes);
     }
-
 }

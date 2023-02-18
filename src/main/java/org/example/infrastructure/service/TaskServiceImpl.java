@@ -31,8 +31,27 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTask(int index, Task task) {
-        return this.taskRepository.updateTask(index, task);
+    public boolean updateTask(int index, String description, OffsetDateTime dueDate, String status) {
+        Task task = this.taskRepository.getTaskByIndex(index, this.getAllTasks());
+        if (description.isBlank()) {
+            description = task.getDescription();
+        }
+        if (dueDate == null) {
+            dueDate = task.getDueDate();
+        }
+        if (status.isBlank()) {
+            status = task.getState().getName();
+        }
+        Task updatedTask = new TaskBuilder()
+                .setDescription(description)
+                .setCreationDate(task.getCreationDate())
+                .dueDate(dueDate)
+                .closeDate(task.getCloseDate())
+                .tag(task.getTag())
+                .subTasks(task.getSubTasks())
+                .state(status)
+                .getResult();
+        return this.taskRepository.updateTask(index, updatedTask);
     }
 
     @Override

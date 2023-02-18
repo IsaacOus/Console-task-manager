@@ -1,4 +1,4 @@
-package org.example.application.cli;
+package org.example.application.userinterface;
 
 import org.example.application.command.Command;
 

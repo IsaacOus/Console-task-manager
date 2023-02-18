@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.application.cli.Interpreter;
+import org.example.application.userinterface.Interpreter;
 import org.example.application.command.Command;
 import org.example.application.io.Printer;
 import org.example.domain.repository.TaskRepository;

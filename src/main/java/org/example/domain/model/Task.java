@@ -17,17 +17,18 @@ public class Task {
     @SerializedName("CloseDate")
     private final OffsetDateTime closeDate;
     @SerializedName("State")
-    private TaskState state = TaskState.TODO;
+    private final TaskState state;
     @SerializedName("Tag")
     private final String tag;
     @SerializedName("SubTasks")
     private final List<Task> subTasks;
 
-    public Task(String description, OffsetDateTime creationDate, OffsetDateTime dueDate, OffsetDateTime closeDate, String tag, List<Task> subTasks) {
+    public Task(String description, OffsetDateTime creationDate, OffsetDateTime dueDate, OffsetDateTime closeDate, TaskState state, String tag, List<Task> subTasks) {
         this.description = description;
         this.creationDate = creationDate;
         this.dueDate = dueDate;
         this.closeDate = closeDate;
+        this.state = state;
         this.tag = tag;
         this.subTasks = subTasks;
     }

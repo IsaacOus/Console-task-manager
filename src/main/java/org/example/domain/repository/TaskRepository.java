@@ -7,7 +7,7 @@ import java.util.List;
 public interface TaskRepository {
 
     Task addTask(Task task);
-    Task updateTask(int index, Task task);
+    boolean updateTask(int index, Task task);
     boolean removeTask(Task task);
     Task getTask(Task task);
     Task getTaskByIndex(int index, List<Task> tasks);
