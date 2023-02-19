@@ -17,7 +17,7 @@ class TaskBuilderTest {
         OffsetDateTime creationDate = OffsetDateTime.now();
         OffsetDateTime dueDate = OffsetDateTime.now().plusDays(1);
         OffsetDateTime closeDate = OffsetDateTime.now().plusDays(2);
-        TaskState state = TaskState.TODO;
+        // A task should be initialized with a state of "todo" by default
         String tag = "test tag";
         Task subTask = new TaskBuilder().setDescription("sub-task").getResult();
         TaskBuilder taskBuilder = new TaskBuilder();
@@ -28,7 +28,7 @@ class TaskBuilderTest {
                 .setCreationDate(creationDate)
                 .dueDate(dueDate)
                 .closeDate(closeDate)
-                .state(state.getName())
+                .state("todo")
                 .tag(tag)
                 .subTasks(Collections.singletonList(subTask))
                 .getResult();
@@ -38,7 +38,7 @@ class TaskBuilderTest {
         assertEquals(creationDate, task.getCreationDate());
         assertEquals(dueDate, task.getDueDate());
         assertEquals(closeDate, task.getCloseDate());
-        assertEquals(state, task.getState());
+        assertEquals(TaskState.TODO, task.getState());
         assertEquals(tag, task.getTag());
         assertEquals(Collections.singletonList(subTask), task.getSubTasks());
     }
